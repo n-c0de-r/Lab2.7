@@ -74,6 +74,12 @@ public class CalcEngine
         applyOperator('-');
     }
     
+	public void multiply()
+	{
+		applyOperator('*');
+		
+	}
+    
     /**
      * The '=' button was pressed.
      */
@@ -149,6 +155,11 @@ public class CalcEngine
                 haveLeftOperand = true;
                 leftOperand = displayValue;
                 break;
+            case '*':
+                displayValue = leftOperand * displayValue;
+                haveLeftOperand = true;
+                leftOperand = displayValue;
+                break;
             default:
                 keySequenceError();
                 break;
@@ -193,4 +204,5 @@ public class CalcEngine
         // Reset everything.
         clear();
     }
+
 }
