@@ -92,6 +92,14 @@ public class CalcEngine
 	{
 		applyOperator('/');
 	}
+	
+	/**
+     * The 'modulo' button was pressed.
+     */
+	public void modulo()
+	{
+		applyOperator('%');
+	}
     
     /**
      * The '=' button was pressed.
@@ -175,6 +183,11 @@ public class CalcEngine
                 break;
             case '/':
                 displayValue = leftOperand / displayValue;
+                haveLeftOperand = true;
+                leftOperand = displayValue;
+                break;
+            case '%':
+                displayValue = leftOperand % displayValue;
                 haveLeftOperand = true;
                 leftOperand = displayValue;
                 break;

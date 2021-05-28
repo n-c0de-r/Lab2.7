@@ -69,7 +69,7 @@ public class UserInterfaceHex extends UserInterface {
         	addButton(buttonPanel, "3");
         	buttonPanel.add(new JLabel(" "));
         	addButton(buttonPanel, "*");
-        	buttonPanel.add(new JLabel(" "));
+        	addButton(buttonPanel, "mod");
         
         	addButton(buttonPanel, "0");
        		buttonPanel.add(new JLabel(" "));
@@ -117,6 +117,8 @@ public class UserInterfaceHex extends UserInterface {
 			calc.multiply();
 		} else if (command.equals("/")) {
 			calc.divide();
+		} else if (command.equals("mod")) {
+			calc.modulo();
 		} else if (command.equals("=")) {
 			calc.equals();
 		} else if (command.equals("del")) {

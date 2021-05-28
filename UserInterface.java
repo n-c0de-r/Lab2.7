@@ -80,7 +80,7 @@ public class UserInterface
             addButton(buttonPanel, "3");
             buttonPanel.add(new JLabel(" "));
             addButton(buttonPanel, "*");
-            buttonPanel.add(new JLabel(" "));
+            addButton(buttonPanel, "mod");
             
             addButton(buttonPanel, "0");
             buttonPanel.add(new JLabel(" "));
@@ -143,10 +143,13 @@ public class UserInterface
         else if(command.equals("/")) {
             calc.divide();
         }
+        else if(command.equals("mod")) {
+            calc.modulo();
+        }
         else if(command.equals("=")) {
             calc.equals();
         }
-        else if(command.equals("C")) {
+        else if(command.equals("del")) {
             calc.clear();
         }
         else if(command.equals("?")) {
