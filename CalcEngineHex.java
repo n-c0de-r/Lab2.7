@@ -5,7 +5,7 @@
  * @version 27.05.2021
  */
 public class CalcEngineHex extends CalcEngine {
-
+		
 	@Override
     public void numberPressed(int number)
     {
@@ -19,4 +19,5 @@ public class CalcEngineHex extends CalcEngine {
             buildingDisplayValue = true;
         }
     }
+	
 }

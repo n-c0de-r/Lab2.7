@@ -17,7 +17,8 @@ import javax.swing.border.EmptyBorder;
  * @version 27.05.2021
  */
 public class UserInterfaceHex extends UserInterface {
-
+	 protected CalcEngineHex calcHex;
+	 
 	public UserInterfaceHex(CalcEngine engine) {
 		super(engine);
 		// TODO Auto-generated constructor stub
@@ -35,7 +36,7 @@ public class UserInterfaceHex extends UserInterface {
 		contentPane.add(display, BorderLayout.NORTH);
 
 		JPanel buttonPanel = new JPanel(new GridLayout(6, 6));
-		addButton(buttonPanel, "A");
+			addButton(buttonPanel, "A");
         	addButton(buttonPanel, "B");
         	addButton(buttonPanel, "C");
         	buttonPanel.add(new JLabel(" "));
@@ -97,18 +98,28 @@ public class UserInterfaceHex extends UserInterface {
 			command.equals("6") ||
 			command.equals("7") ||
 			command.equals("8") ||
-			command.equals("9")) {
-			int number = Integer.parseInt(command);
+			command.equals("9")	||
+			command.equals("A") ||
+			command.equals("B") ||
+			command.equals("C") ||
+			command.equals("D") ||
+			command.equals("E") ||
+			command.equals("F")) {
+			//HexLetters to int:
+			int number = Integer.parseInt(command,16);
 			calc.numberPressed(number);
+				
 		} else if (command.equals("+")) {
 			calc.plus();
 		} else if (command.equals("-")) {
 			calc.minus();
 		} else if (command.equals("*")) {
 			calc.multiply();
+		} else if (command.equals("/")) {
+			calc.divide();
 		} else if (command.equals("=")) {
 			calc.equals();
-		} else if (command.equals("C")) {
+		} else if (command.equals("del")) {
 			calc.clear();
 		} else if (command.equals("?")) {
 			showInfo();
@@ -117,8 +128,10 @@ public class UserInterfaceHex extends UserInterface {
 
 		redisplay();
 	}
-
+	
+	//Change (int) displayValue to Hex (String) and capitalizes the letter
 	private void redisplay() {
-		display.setText("" + calc.getDisplayValue());
+		display.setText("" + Integer.toHexString(calc.getDisplayValue()).toUpperCase());
+		
 	}
 }
