@@ -10,16 +10,19 @@ import javax.swing.border.*;
  * 
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
+ * 
+ * @author Alex Jäger and Nermin Rustic
+ * @version 27.05.2021
  */
 public class UserInterface
     implements ActionListener
 {
-    private CalcEngine calc;
+    protected CalcEngine calc;
     private boolean showingAuthor;
 
-    private JFrame frame;
-    private JTextField display;
-    private JLabel status;
+    protected JFrame frame;
+    protected JTextField display;
+    protected JLabel status;
 
     /**
      * Create a user interface.
@@ -56,25 +59,33 @@ public class UserInterface
         display = new JTextField();
         contentPane.add(display, BorderLayout.NORTH);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(5, 6));
+        JPanel buttonPanel = new JPanel(new GridLayout(4, 6));
             addButton(buttonPanel, "7");
             addButton(buttonPanel, "8");
             addButton(buttonPanel, "9");
+            buttonPanel.add(new JLabel(" "));
+            addButton(buttonPanel, "+");
             addButton(buttonPanel, "C");
             
             addButton(buttonPanel, "4");
             addButton(buttonPanel, "5");
             addButton(buttonPanel, "6");
+            buttonPanel.add(new JLabel(" "));
+            addButton(buttonPanel, "-");
             addButton(buttonPanel, "?");
             
             addButton(buttonPanel, "1");
             addButton(buttonPanel, "2");
             addButton(buttonPanel, "3");
+            buttonPanel.add(new JLabel(" "));
             addButton(buttonPanel, "*");
+            buttonPanel.add(new JLabel(" "));
             
             addButton(buttonPanel, "0");
-            addButton(buttonPanel, "+");
-            addButton(buttonPanel, "-");
+            buttonPanel.add(new JLabel(" "));
+            buttonPanel.add(new JLabel(" "));
+            buttonPanel.add(new JLabel(" "));
+            addButton(buttonPanel, "/");
             addButton(buttonPanel, "=");
             
         contentPane.add(buttonPanel, BorderLayout.CENTER);
@@ -90,7 +101,7 @@ public class UserInterface
      * @param panel The panel to receive the button.
      * @param buttonText The text for the button.
      */
-    private void addButton(Container panel, String buttonText)
+    protected void addButton(Container panel, String buttonText)
     {
         JButton button = new JButton(buttonText);
         button.addActionListener(this);
@@ -128,6 +139,9 @@ public class UserInterface
         else if(command.equals("*")) {
             calc.multiply();
         }
+        else if(command.equals("/")) {
+            calc.divide();
+        }
         else if(command.equals("=")) {
             calc.equals();
         }
@@ -155,7 +169,7 @@ public class UserInterface
      * Toggle the info display in the calculator's status area between the
      * author and version information.
      */
-    private void showInfo()
+    protected void showInfo()
     {
         if(showingAuthor)
             status.setText(calc.getVersion());
