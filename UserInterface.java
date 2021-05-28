@@ -11,9 +11,10 @@ import javax.swing.border.*;
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
  * 
- * @author Alex Jäger and Nermin Rustic
+ * @author Alex and n-c0de-r
  * @version 27.05.2021
  */
+
 public class UserInterface
     implements ActionListener
 {
@@ -48,7 +49,7 @@ public class UserInterface
     /**
      * Make the frame for the user interface.
      */
-    private void makeFrame()
+    protected void makeFrame()
     {
         frame = new JFrame(calc.getTitle());
         
@@ -65,7 +66,7 @@ public class UserInterface
             addButton(buttonPanel, "9");
             buttonPanel.add(new JLabel(" "));
             addButton(buttonPanel, "+");
-            addButton(buttonPanel, "C");
+            addButton(buttonPanel, "del");
             
             addButton(buttonPanel, "4");
             addButton(buttonPanel, "5");
