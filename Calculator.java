@@ -5,7 +5,7 @@
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
  * 
- * @author Alex Jäger and Nermin Rustic
+ * @author Alex and n-c0de-r
  * @version 27.05.2021
  */
 public class Calculator
