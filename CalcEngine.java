@@ -11,14 +11,14 @@ public class CalcEngine
     
     // Are we already building a value in the display, or will the
     // next digit be the first of a new one?
-    private boolean buildingDisplayValue;
+    protected boolean buildingDisplayValue;
     // Has a left operand already been entered (or calculated)?
     private boolean haveLeftOperand;
     // The most recent operator that was entered.
     private char lastOperator;
 
     // The current value (to be) shown in the display.
-    private int displayValue;
+    protected int displayValue;
     // The value of an existing left operand.
     private int leftOperand;
 
@@ -74,10 +74,20 @@ public class CalcEngine
         applyOperator('-');
     }
     
+    /**
+     * The 'multiply' button was pressed.
+     */
 	public void multiply()
 	{
 		applyOperator('*');
-		
+	}
+	
+	/**
+     * The 'divide' button was pressed.
+     */
+	public void divide()
+	{
+		applyOperator('/');
 	}
     
     /**
@@ -117,7 +127,7 @@ public class CalcEngine
      */
     public String getTitle()
     {
-        return "Java Calculator";
+        return "Better Java Calculator";
     }
 
     /**
@@ -125,7 +135,7 @@ public class CalcEngine
      */
     public String getAuthor()
     {
-        return "David J. Barnes and Michael Kolling";
+        return "D.J. Barnes & M. Kolling update by Alex & Nermin";
     }
 
     /**
@@ -133,7 +143,7 @@ public class CalcEngine
      */
     public String getVersion()
     {
-       return "Version 1.0";
+       return "Version 1.5";
     }
 
     /**
@@ -157,6 +167,11 @@ public class CalcEngine
                 break;
             case '*':
                 displayValue = leftOperand * displayValue;
+                haveLeftOperand = true;
+                leftOperand = displayValue;
+                break;
+            case '/':
+                displayValue = leftOperand / displayValue;
                 haveLeftOperand = true;
                 leftOperand = displayValue;
                 break;
