@@ -4,6 +4,9 @@
  * 
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
+ * 
+ * @author Alex Jäger and Nermin Rustic
+ * @version 27.05.2021
  */
 public class Calculator
 {
@@ -15,8 +18,10 @@ public class Calculator
      */
     public Calculator()
     {
-        engine = new CalcEngine();
-        gui = new UserInterface(engine);
+        //engine = new CalcEngine();
+        //gui = new UserInterface(engine);
+    	engine = new CalcEngineHex();
+        gui = new UserInterfaceHex(engine);
     }
 
     /**
@@ -25,5 +30,9 @@ public class Calculator
     public void show()
     {
         gui.setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+    	Calculator c = new Calculator();
     }
 }
