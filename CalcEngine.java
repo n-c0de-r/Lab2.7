@@ -3,6 +3,9 @@
  * 
  * @author  David J. Barnes and Michael Kolling 
  * @version 2008.03.30
+ * 
+ * @author Alex Jäger and Nermin Rustic
+ * @version 27.05.2021
  */
 public class CalcEngine
 {
