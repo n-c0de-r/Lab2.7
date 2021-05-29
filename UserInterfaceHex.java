@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
@@ -13,11 +14,14 @@ import javax.swing.border.EmptyBorder;
  * done here. This class is responsible just for putting up the display on 
  * screen. It then refers to the "CalcEngine" to do all the real work.
  * 
- * @author Alex and n-c0de-r
+ * @author AlexJger and n-c0de-r
  * @version 27.05.2021
  */
 public class UserInterfaceHex extends UserInterface {
 	 protected CalcEngineHex calcHex;
+	 
+	 private Checkbox h;
+	 private int mode = 10;
 	 
 	public UserInterfaceHex(CalcEngine engine) {
 		super(engine);
@@ -34,61 +38,67 @@ public class UserInterfaceHex extends UserInterface {
 
 		display = new JTextField();
 		contentPane.add(display, BorderLayout.NORTH);
-
+		
 		JPanel buttonPanel = new JPanel(new GridLayout(6, 6));
-			addButton(buttonPanel, "A");
-        	addButton(buttonPanel, "B");
-        	addButton(buttonPanel, "C");
-        	buttonPanel.add(new JLabel(" "));
-        	buttonPanel.add(new JLabel(" "));
-        	buttonPanel.add(new JLabel(" "));
-        
-        	addButton(buttonPanel, "D");
-        	addButton(buttonPanel, "E");
-        	addButton(buttonPanel, "F");
+		addButton(buttonPanel, "A");
+       		addButton(buttonPanel, "B");
+       		addButton(buttonPanel, "C");
+       		buttonPanel.add(new JLabel(" "));
+       		buttonPanel.add(new JLabel(" "));
+        	h = (Checkbox) (buttonPanel.add(new Checkbox("Hex", false)));
+       
+       		addButton(buttonPanel, "D");
+       		addButton(buttonPanel, "E");
+       		addButton(buttonPanel, "F");
+      		buttonPanel.add(new JLabel(" "));
+       		buttonPanel.add(new JLabel(" "));
+       		buttonPanel.add(new JLabel(" "));
+       
+       		addButton(buttonPanel, "7");
+       		addButton(buttonPanel, "8");
+       		addButton(buttonPanel, "9");
+       		buttonPanel.add(new JLabel(" "));
+       		addButton(buttonPanel, "+");
+       		addButton(buttonPanel, "del");
+       
+       		addButton(buttonPanel, "4");
+       		addButton(buttonPanel, "5");
+       		addButton(buttonPanel, "6");
+       		buttonPanel.add(new JLabel(" "));
+       		addButton(buttonPanel, "-");
+       		addButton(buttonPanel, "?");
+       
+       		addButton(buttonPanel, "1");
+       		addButton(buttonPanel, "2");
+       		addButton(buttonPanel, "3");
+       		buttonPanel.add(new JLabel(" "));
+       		addButton(buttonPanel, "*");
+       		addButton(buttonPanel, "mod");
+       
+       		addButton(buttonPanel, "0");
        		buttonPanel.add(new JLabel(" "));
         	buttonPanel.add(new JLabel(" "));
-        	buttonPanel.add(new JLabel(" "));
-        
-        	addButton(buttonPanel, "7");
-        	addButton(buttonPanel, "8");
-        	addButton(buttonPanel, "9");
-        	buttonPanel.add(new JLabel(" "));
-        	addButton(buttonPanel, "+");
-        	addButton(buttonPanel, "del");
-        
-        	addButton(buttonPanel, "4");
-        	addButton(buttonPanel, "5");
-        	addButton(buttonPanel, "6");
-        	buttonPanel.add(new JLabel(" "));
-        	addButton(buttonPanel, "-");
-        	addButton(buttonPanel, "?");
-        
-        	addButton(buttonPanel, "1");
-        	addButton(buttonPanel, "2");
-        	addButton(buttonPanel, "3");
-        	buttonPanel.add(new JLabel(" "));
-        	addButton(buttonPanel, "*");
-        	addButton(buttonPanel, "mod");
-        
-        	addButton(buttonPanel, "0");
        		buttonPanel.add(new JLabel(" "));
-        	buttonPanel.add(new JLabel(" "));
-        	buttonPanel.add(new JLabel(" "));
-        	addButton(buttonPanel, "/");
-        	addButton(buttonPanel, "=");
-
+       		addButton(buttonPanel, "/");
+       		addButton(buttonPanel, "=");
+       	
 		contentPane.add(buttonPanel, BorderLayout.CENTER);
 
 		status = new JLabel(calc.getAuthor());
 		contentPane.add(status, BorderLayout.SOUTH);
 
 		frame.pack();
+		toggleLetters();
 	}
-
+	
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
-
+		
+		if (h.getState()) {
+			mode = 16;
+		} else {
+			mode = 10;
+		}
 		if (command.equals("0") || 
 			command.equals("1") ||
 			command.equals("2") ||
@@ -105,9 +115,10 @@ public class UserInterfaceHex extends UserInterface {
 			command.equals("D") ||
 			command.equals("E") ||
 			command.equals("F")) {
+			
 			//HexLetters to int:
-			int number = Integer.parseInt(command,16);
-			calc.numberPressed(number);
+			int number = Integer.parseInt(command, mode);
+			calc.numberPressed(number, mode);
 				
 		} else if (command.equals("+")) {
 			calc.plus();
@@ -127,13 +138,28 @@ public class UserInterfaceHex extends UserInterface {
 			showInfo();
 		}
 		// else unknown command.
-
+		toggleLetters();
 		redisplay();
 	}
 	
 	//Change (int) displayValue to Hex (String) and capitalizes the letter
 	private void redisplay() {
-		display.setText("" + Integer.toHexString(calc.getDisplayValue()).toUpperCase());
 		
+		if (h.getState()) {
+			display.setText("" + Integer.toHexString(calc.getDisplayValue()).toUpperCase());
+			 
+		} else {
+			display.setText("" + calc.getDisplayValue());
+		}
+	}
+	
+	private void toggleLetters() {
+		//TODO disable buttons
+//		frame.getContentPane().getComponent(1).getComponentAt(p).setEnabled(h.getState());
+//		frame.getContentPane().getComponent(1).getComponentAt(1, 2).setEnabled(h.getState());
+//		frame.getContentPane().getComponent(1).getComponentAt(1, 3).setEnabled(h.getState());
+//		frame.getContentPane().getComponent(1).getComponentAt(2, 1).setEnabled(h.getState());
+//		frame.getContentPane().getComponent(1).getComponentAt(2, 2).setEnabled(h.getState());
+//		frame.getContentPane().getComponent(1).getComponentAt(2, 3).setEnabled(h.getState());
 	}
 }
