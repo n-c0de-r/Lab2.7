@@ -1,12 +1,3 @@
-/**
- * The main part of the calculator doing the calculations.
- * 
- * @author  David J. Barnes and Michael Kolling 
- * @version 2008.03.30
- * 
- * @author Alex and n-c0de-r
- * @version 27.05.2021
- */
 public class CalcEngine
 {
     // The calculator's state is maintained in three fields:
@@ -48,6 +39,19 @@ public class CalcEngine
      * the least significant digit of an existing one.
      * @param number The number pressed on the calculator.
      */
+    public void numberPressed(int number, int mode)
+    {
+        if(buildingDisplayValue) {
+            // Incorporate this digit.
+            displayValue = displayValue*mode + number;
+        }
+        else {
+            // Start building a new number.
+            displayValue = number;
+            buildingDisplayValue = true;
+        }
+    }
+
     public void numberPressed(int number)
     {
         if(buildingDisplayValue) {
@@ -60,7 +64,7 @@ public class CalcEngine
             buildingDisplayValue = true;
         }
     }
-
+    
     /**
      * The 'plus' button was pressed. 
      */
@@ -154,7 +158,7 @@ public class CalcEngine
      */
     public String getVersion()
     {
-       return "Version 1.5";
+       return "Version 2";
     }
 
     /**
